@@ -3,16 +3,17 @@
 void print_buffer(char buffer[], int *buff_ind);
 
 /**
- * _printf - Printf function
- * @format: format.
- * Return: Printed chars.
+ * _printf - My personal printf function
+ * @format: format by emtolalaa
+ * Return: emto's chars that are printed.
  */
 int _printf(const char *format, ...)
 {
+	char buffer[BUFF_SIZE];
+	va_list list;
 	int i, printed = 0, printed_chars = 0;
 	int flags, width, precision, size, buff_ind = 0;
-	va_list list;
-	char buffer[BUFF_SIZE];
+
 
 	if (format == NULL)
 		return (-1);
@@ -32,10 +33,10 @@ int _printf(const char *format, ...)
 		else
 		{
 			print_buffer(buffer, &buff_ind);
-			flags = get_flags(format, &i);
-			width = get_width(format, &i, list);
-			precision = get_precision(format, &i, list);
-			size = get_size(format, &i);
+			flags = get_flag_emto(format, &i);
+			width = get_width_emto(format, &i, list);
+			precision = get_precision_emto(format, &i, list);
+			size = get_size_emto(format, &i);
 			++i;
 			printed = handle_print(format, &i, list, buffer,
 				flags, width, precision, size);
@@ -53,9 +54,9 @@ int _printf(const char *format, ...)
 }
 
 /**
- * print_buffer - Prints the contents of the buffer if it exist
- * @buffer: Array of chars
- * @buff_ind: Index at which to add next char, represents the length.
+ * print_buffer - To only output existing buffers
+ * @buffer: Characters in Array form
+ * @buff_ind: This would represent the length and index for the chars.
  */
 void print_buffer(char buffer[], int *buff_ind)
 {
